@@ -70,8 +70,16 @@ $(document).ready(function () {
         timestamp = Date.now()*0.0001;
         var time = timestamp - initTime;
         requestAnimationFrame( animate );
-        electron.position.x = 8*Math.exp(-0.1*(time))*Math.sin(time*2*Math.PI);
-        electron.position.z = 8*Math.exp(-0.1*(time))*Math.cos(time*2*Math.PI);
+        //electron.position.x = 8*Math.exp(-0.1*(time))*Math.sin(time*2*Math.PI);
+        //electron.position.z = 8*Math.exp(-0.1*(time))*Math.cos(time*2*Math.PI);
+        if ((1-time*time*time) >= 0) {
+            electron.position.z = 8*(1-time*time*time)*Math.cos(time*4*Math.PI);
+            electron.position.x = 8*(1-time*time*time)*Math.sin(time*4*Math.PI);
+        } else {
+            electron.position.z = 0;
+            electron.position.x = 0;
+        }
+
 		render();
     }
 
